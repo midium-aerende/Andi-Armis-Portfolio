@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andi-Armis | Développeur Full Stack</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body,
+    .container,
+    div,
+    section,
+    header,
+    footer {
+      animation: fadeIn 1.2s ease-in-out forwards;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      align-items: center;
+      transition: transform 0.3s ease;
+      box-sizing: border-box;
+      margin-right: auto;
+    }
+
+    h1:hover {
+      transform: translateY(-5px) scale(1.05);
+    }
+
+    body {
+      display: flex;
+      max-width: 98vw;
+      margin: auto;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      background: #0d1117;
+      color: #c9d1d9;
+      transition: background-color 0.3s ease;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+      background-color: #161b22;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .menu-btn {
+      display: none;
+      font-size: 1.2rem;
+      align-items: center;
+      background: none;
+      border: none;
+      color: #c9d1d9;
+      cursor: pointer;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .menu-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+    }
+
+    .menu-btn:hover svg rect {
+      fill: #58a6ff;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      font-size: 1rem;
+      color: #c9d1d9;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #58a6ff;
+      transform: translateY(-5px) scale(1.05);
+    }
+
+    #hero {
+      background: #161b22;
+      background-image: url('./images/fond.webp');
+      background-position: center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 70vh;
+      max-height: 700px;
+      padding: 0 2rem;
+      transition: background-size 0.5s ease;
+    }
+
+    .hero-content {
+      background: #0003;
+      max-width: 600px;
+      border-radius: .2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem 2rem;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s forwards;
+    }
+
+    #hero h1 {
+      font-size: 2rem;
+      color: #c9d1d9;
+      margin-bottom: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    #hero h2 {
+      font-size: 1rem;
+      color: #c9d1d9;
+      margin-bottom: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    #hero p {
+      font-size: .9rem;
+      color: #b8c9ce;
+      margin-bottom: 2rem;
+      transition: color 0.3s ease;
+    }
+
+    .btn {
+      background-color: #238636;
+      max-height: 4rem;
+      padding: .5rem 1rem;
+      color: white;
+      border-radius: .1rem;
+      text-decoration: none;
+      font-family: 'Fira Code', monospace;
+      font-size: .9rem;
+      transition: background-color 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #2ea043;
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    .section {
+      padding: 3rem 2rem;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1.2s forwards;
+      animation-delay: 0.5s;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      transition: color 0.3s;
+    }
+
+    .section p {
+      max-width: 700px;
+      margin-inline: auto;
+      font-size: 1rem;
+      margin-top: .5rem;
+      color: #8b949e;
+      transition: color 0.3s;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .skill {
+      background-color: #21262d;
+      font-size: 1rem;
+      padding: .5rem 1rem;
+      border-radius: .2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .skill:hover {
+      transform: translateY(-5px) scale(1.05);
+    }
+
+    .project-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+      grid-gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background-color: #21262d;
+      padding: 1rem;
+      border-radius: .2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: left;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      max-width: 80vw;
+    }
+
+    .card:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h3,
+    a {
+      color: #58a6ff;
+      font-family: 'Fira Code', monospace;
+      margin-bottom: 1rem;
+      overflow-wrap: break-word;
+    }
+
+    .card p {
+      color: #8b949e;
+      font-family: 'Fira Code', monospace;
+      font-size: .9rem;
+      overflow-wrap: break-word;
+    }
+
+    footer {
+      font-size: 1rem;
+      background-color: #161b22;
+      color: #8b949e;
+      padding: 1rem;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .contact-form {
+      background: #0003;
+      max-width: 500px;
+      display: flex;
+      gap: 1rem;
+      flex-direction: column;
+      border-radius: .2rem;
+      align-items: center;
+      margin-top: 1rem;
+      padding: 1rem;
+      margin-inline: auto;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      font-size: .9rem;
+      max-width: 500px;
+      padding: .5rem;
+      border-radius: .2rem;
+      border: 1px solid #ccc;
+      background-color: #21262d;
+      color: #c9d1d9;
+      transition: transform 0.3s ease, border-color 0.3s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #58a6ff;
+      transform: translateY(-3px) scale(1.02);
+      outline: none;
+      resize: none;
+    }
+
+    .contact-form button {
+      background-color: #238636;
+      padding: .5rem 1rem;
+      border: none;
+      color: white;
+      border-radius: .2rem;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .contact-form button:hover {
+      background-color: #2ea043;
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    .toast {
+      font-size: 1rem;
+      position: fixed;
+      top: 2rem;
+      align-self: center;
+      background-color: #238636;
+      color: white;
+      padding: .5rem 1rem;
+      border-radius: .2rem;
+      z-index: 2000;
+      display: none;
+      transition: opacity 0.5s, top 0.5s, transform 0.3s ease;
+    }
+
+    .toast:hover {
+      transform: translateY(-5px) scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        transform: translateY(-1rem);
+      }
+    }
+
+    .mobile-nav {
+      display: none;
+      gap: 1rem;
+      list-style: none;
+      max-width: 10rem;
+      flex-direction: column;
+      position: absolute;
+      top: 4rem;
+      right: 0;
+      background-color: #161b22;
+      border-radius: .2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 1em;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      z-index: 1000;
+    }
+
+    .menu-btn:hover+nav .mobile-nav {
+      display: flex;
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    .mobile-nav:hover {
+      display: flex;
+    }
+
+    @media (max-width: 800px) {
+      .nav-links {
+        display: none;
+      }
+
+      .menu-btn {
+        display: grid;
+      }
+
+      .mobile-nav {
+        display: none;
+      }
+
+      .mobile-nav a {
+        font-size: .9rem;
+        padding: .5rem;
+        color: #c9d1d9;
+        text-decoration: none;
+        font-weight: bold;
+        transition: transform 0.3s, color 0.3s;
+      }
+
+      .mobile-nav a:hover {
+        color: #58a6ff;
+        transform: translateY(-3px) scale(1.05);
+      }
+    }
+
+    @media (min-width: 400px) {
+
+      .card h3,
+      .card p,
+      footer,
+      .section p {
+        font-size: .9rem;
+      }
+    }
+
+    /* Keyframe animations */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes easeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Section galerie */
+.gallery {
+    position: relative;
+    width: 95vw;
+    max-width: 920px;
+    margin: auto;
+    padding-block: 1rem 2rem;
+    text-align: center;
+}
+
+.gallery h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #eee;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+.gallery-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.gallery-images {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    padding: 32px;
+    flex-wrap: nowrap;
+}
+
+.gallery-item {
+    margin-inline: 15px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 200px;
+    min-width: 250px;  
+    min-height: 150px; 
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+
+.gallery-item:hover .gallery-img {
+    transform: scale(1.1);
+}
+
+.arrow {
+    display: grid;
+    width: 1rem;
+    height: 1rem;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    top: 40%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 20px;
+    border: none;
+    padding: 20px;
+    position: absolute;
+    z-index: 10;
+    cursor: pointer;
+    border-radius: .2rem;
+    transition: background-color 0.3s;
+}
+
+.arrow:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.left {
+    left: 20px;
+}
+
+.right {
+    right: 20px;
+}
+
+.modal {
+    display: none;
+    align-content: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1000;
+    width: 90vw;
+    max-width: 800px;
+    height: 40vh;
+    max-height: 600px;
+    align-self: center;
+    top: 30%;
+    border-radius: .4rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: opacity 0.3s ease-in-out;
+}
+
+.modal-content {
+    display: grid;
+    max-width: 100%;
+    max-height: 100%;
+    padding: .4rem;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    border-radius: .2rem;
+    animation: slideIn 0.5s ease-out;
+}
+
+/* Animation SlideIn */
+@keyframes slideIn {
+    from {
+        transform: translateY(-20%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Légende sous l'image */
+#caption {
+    bottom: 10px;
+    justify-self: center;
+    position: absolute;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    padding-top: 10px;
+}
+
+/* Fermeture du modal */
+.close {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+
+/* Media Queries pour la Responsivité */
+@media (max-width: 768px) {
+    .gallery-container {
+        padding: 0 20px; /* Padding pour éviter les bords trop serrés */
+    }
+
+    .gallery-images {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .gallery-item {
+        margin-bottom: 0px; /* Espace vertical entre les cartes d'images */
+    }
+
+    /* Taille des images sur les petits écrans */
+    .gallery-img {
+        background-size: cover;
+        max-width: 90%;
+        min-width: 220px;
+        max-height: 180px;
+    }
+
+    .arrow {
+        font-size: 25px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-img {
+        max-width: 80%;
+        min-width: 200px;
+        max-height: 150px;
+    }
+
+    .arrow {
+        font-size: 20px;
+        padding: 12px;
+    }
+}
+
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Andi Armis | Développeur Full Stack</h1>
+    <button class="menu-btn" id="menuBtn"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" viewBox="0 0 30 20">
+        <rect x="0" y="0" width="30" height="4" rx="2" fill="#c9d1d9" />
+        <rect x="0" y="8" width="30" height="4" rx="2" fill="#c9d1d9" />
+        <rect x="0" y="16" width="30" height="4" rx="2" fill="#c9d1d9" />
+      </svg>
+    </button>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#skills">Compétences</a></li>
+        <li><a href="#projects">Projets</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="https://github.com/midium-aerende" target="_blank">GitHub</a></li>
+      </ul>
+      <ul class="mobile-nav" id="mobileNav">
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#skills">Compétences</a></li>
+        <li><a href="#projects">Projets</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="https://github.com/midium-aerende" target="_blank">GitHub</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="hero">
+    <div class="hero-content">
+      <h2>Développeur Full Stack</h2>
+      <p>Transformez votre vision en réalité numérique ! J'utilise une approche centrée sur l'utilisateur pour créer des solutions web intuitives et performantes.</p>
+      <a href="#contact" class="btn">Contactez-moi dès aujourd'hui</a>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <h2>À propos de moi</h2>
+    <p>Passionné par le développement Full Stack et l'UX/UI, je transforme des idées en solutions pratiques. Mon but : allier esthétique et efficacité pour chaque projet.</p>
+  </section>
+
+  <section id="skills" class="section">
+    <h2>Mes compétences clés</h2>
+    <div class="skills">
+      <div class="skill">HTML/CSS</div>
+      <div class="skill">JavaScript</div>
+      <div class="skill">React</div>
+      <div class="skill">Node.js</div>
+      <div class="skill">Python</div>
+      <div class="skill">UX/UI Design</div>
+    </div>
+  </section>
+
+<!-- Modal for image enlargement -->
+  <div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+    <div id="caption"></div>
+  </div>
+
+  <section id="projects" class="section">
+    <h2>Réalisations</h2>
+    <div class="project-cards">
+      <div class="card">
+        <div class="material-icons"><svg xmlns="http://www.w3.org/2000/svg" height="2rem" viewBox="0 -960 960 960" width="2rem" fill="#58a6ff">
+            <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h420v-140H160v140Zm500 0h140v-360H660v360ZM160-460h420v-140H160v140Z" />
+          </svg></div>
+        <h3><a href="https://midium-aerende.github.io/project1/" target="_blank">Project 1</a></h3>
+        <p>Une application web innovante avec une interface intuitive.</p>
+      </div>
+      <div class="card">
+        <div class="material-icons"><svg xmlns="http://www.w3.org/2000/svg" height="2rem" viewBox="0 -960 960 960" width="2rem" fill="#58a6ff">
+            <path d="m193-479 155 155q11 11 11 28t-11 28q-11 11-28 11t-28-11L108-452q-6-6-8.5-13T97-480q0-8 2.5-15t8.5-13l184-184q12-12 28.5-12t28.5 12q12 12 12 28.5T349-635L193-479Zm574-2L612-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L668-268q-12 12-28 11.5T612-269q-12-12-12-28.5t12-28.5l155-155Z" />
+          </svg></div>
+        <h3><a href="https://midium-aerende.github.io/Dino-Game/" target="_blank">Project 2</a></h3>
+        <p>Jeu Dino : amusant et interactif, idéal pour montrer mes compétences en JavaScript."</p>
+      </div>
+      <div class="card">
+        <div class="material-icons"><svg xmlns="http://www.w3.org/2000/svg" height="2rem" viewBox="0 -960 960 960" width="2rem" fill="#58a6ff">
+            <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h420v-140H160v140Zm500 0h140v-360H660v360ZM160-460h420v-140H160v140Z" />
+          </svg></div>
+        <h3><a href="https://midium-aerende.github.io/call-log-manager/" target="_blank">Project 3</a></h3>
+        <p>Plateforme pour optimiser la gestion des tâches.</p>
+      </div>
+      <div class="card">
+        <div class="material-icons"><svg xmlns="http://www.w3.org/2000/svg" height="2rem" viewBox="0 -960 960 960" width="2rem" fill="#58a6ff">
+            <path d="m193-479 155 155q11 11 11 28t-11 28q-11 11-28 11t-28-11L108-452q-6-6-8.5-13T97-480q0-8 2.5-15t8.5-13l184-184q12-12 28.5-12t28.5 12q12 12 12 28.5T349-635L193-479Zm574-2L612-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L668-268q-12 12-28 11.5T612-269q-12-12-12-28.5t12-28.5l155-155Z" />
+          </svg></div>
+        <h3><a href="https://midium-aerende.github.io/Quiz/index.html" target="_blank">Project 4</a></h3>
+        <p>Quiz interactif : testez vos connaissances de manière ludique.</p>
+      </div>
+    </div>
+  </section>
+  
+  <section class="gallery">
+    <h2 class="section-title">Réalisations graphiques</h2>
+    <div class="gallery-container">
+        <div class="gallery-images">
+            <div class="gallery-item">
+                <img src="./images/image1.jpg" alt="conception 1" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/image2.jpg" alt="conception 2" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/image3.jpg" alt="conception 3" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/image4.jpg" alt="conception 4" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/image5.jpg" alt="conception 5" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./im1ges/image6.jpg" alt="conception 6" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/image7.jpg" alt="conception 7" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/image8.jpg" alt="conception 8" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/image9.jpg" alt="conception 9" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/image10.jpg" alt="conception 10" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/image11.jpg" alt="conception 11" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/image12.jpg" alt="conception 12" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/image13.jpg" alt="conception 13" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/image14.jpg" alt="conception 14" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/image15.jpg" alt="conception 15" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/image16.jpg" alt="conception 16" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/image17.jpg" alt="conception 17" class="gallery-img" onclick="openModal(this)">
+            </div>
+            <div class="gallery-item">
+                <img src="./images/image18.jpg" alt="conception 18" class="gallery-img" onclick="openModal(this)">
+            </div>
+           <div class="gallery-item">
+                <img src="./images/image19.jpg" alt="conception 19" class="gallery-img" onclick="openModal(this)">
+            </div> 
+            <!-- Ajouter plus d'images ici -->
+        </div>
+        <!-- Flèches de navigation -->
+    <button class="arrow left" onclick="moveGallery(-1)">  <<
+    </button>
+    <button class="arrow right" onclick="moveGallery(1)"> >>
+    </button>
+    
+    <!-- Modal pour agrandir l'image -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
+    </div>
+</section>
+
+  <section id="contact" class="section">
+    <h2>Restons en contact</h2>
+    <p>Questions ou projets en tête ? Contactez-moi ! Je suis là pour vous aider à concrétiser vos idées. :</p>
+
+    <div class="contact-form">
+      <input type="text" id="name" placeholder="Votre nom" required autocomplete="false">
+      <input type="email" id="email" placeholder="Votre e-mail" required autocomplete="false">
+      <textarea id="message" placeholder="Votre message" rows="4" required></textarea>
+      <button type="submit" id="submitBtn">Envoyer mon message</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Andi Armis | Développeur Full Stack</p>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('Portfolio loaded successfully');
+    });
+    
+    const contactForm = document.querySelector('.contact-form');
+    const submitBtn = document.getElementById('submitBtn');
+    const toast = document.getElementById('toast');
+    
+    submitBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+    
+        if (name && email && message) {
+          
+            showToast(`Merci, ${name}! Votre message a été envoyé avec succès.`);
+    
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('message').value = '';
+        } else {
+            showToast('Veuillez remplir tous les champs.', true);
+        }
+    });
+    
+    function showToast(message, isError = false) {
+        toast.textContent = message;
+        toast.style.backgroundColor = isError ? '#d73a49' : '#238636';
+        
+        toast.style.display = 'block';
+        toast.style.opacity = 1;
+        toast.style.top = '20px';
+        
+        setTimeout(() => {
+            toast.style.opacity = 0;
+            toast.style.top = '10px';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 500);
+        }, 3000);
+    }
+    
+    function openModal(img) {
+      var modal = document.getElementById('imageModal');
+      var modalImg = document.getElementById("modalImage");
+      var caption = document.getElementById("caption");
+      modal.style.display = "grid";
+      modalImg.src = img.src;
+      caption.innerHTML = img.alt;
+    }
+
+    function closeModal() {
+      var modal = document.getElementById('imageModal');
+      modal.style.display = "none";
+    }
+
+    function moveGallery(direction) {
+      const container = document.querySelector('.gallery-images');
+      const itemWidth = document.querySelector('.gallery-item').offsetWidth;
+      container.scrollBy({left: direction * (itemWidth + 30), behavior: 'smooth'});
+    }
+
+    window.onclick = function(event) {
+      var modal = document.getElementById('imageModal');
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+
+</html>
