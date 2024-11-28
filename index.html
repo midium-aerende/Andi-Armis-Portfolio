@@ -478,6 +478,10 @@
     flex-wrap: nowrap;
 }
 
+    .gallery-images::-webkit-scrollbar {
+      display: none;
+    }
+
 .gallery-item {
     margin-inline: 15px;
     cursor: pointer;
@@ -633,10 +637,6 @@
 }
 
 @media (max-width: 480px) {
-  
-  *::-webkit-scrollbar {
-      display: none;
-    }
   
     .gallery-img {
         max-width: 80%;
