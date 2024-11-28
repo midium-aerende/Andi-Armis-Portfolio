@@ -15,10 +15,6 @@
       padding: 0;
       user-select: none;
     }
-    
-    *::-webkit-scrollbar {
-      display: none;
-    }
 
     body,
     .container,
@@ -637,6 +633,11 @@
 }
 
 @media (max-width: 480px) {
+  
+  *::-webkit-scrollbar {
+      display: none;
+    }
+  
     .gallery-img {
         max-width: 80%;
         min-width: 200px;
