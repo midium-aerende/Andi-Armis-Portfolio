@@ -136,6 +136,51 @@ section {
   background: rgba(12, 12, 12, 0.8);
 }
 
+.faq-section {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.faq-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.faq-item {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 8, 8, 0.45);
+}
+
+.faq-q {
+  width: 100%;
+  text-align: left;
+  padding: 0.9rem 1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: #f2f2f2;
+  background: transparent;
+  border: none;
+}
+
+.faq-q[aria-expanded="true"] {
+  color: var(--blue);
+}
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1rem;
+  color: #b8b8b8;
+  font-size: 0.72rem;
+  line-height: 1.7;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faq-a.open {
+  max-height: 20rem;
+  padding: 0 1rem 0.9rem;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
